@@ -6,7 +6,6 @@ import com.example.socialnetworkmanagement.Repository.UserRepository;
 import com.example.socialnetworkmanagement.Service.PostService;
 import com.example.socialnetworkmanagement.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +47,9 @@ public class UserController {
                          @CookieValue(value = "currentUser", required = false) String currentUser) {
         if (currentUser != null && currentUser != "") {
             model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
-            return "signin";
+            return "login";
         }
-        return "signin";
+        return "login";
     }
 
     @PostMapping("/authenticate-user")
@@ -73,7 +72,7 @@ public class UserController {
     @GetMapping("/authError")
     public String authError(User user, Model model) {
         model.addAttribute("msg", "The username and password you entered is incorrect. No Account? Sign Up using the link below.");
-        return "signin";
+        return "login";
     }
 
     /**************** ### User Profile based on Cookie and Id Values ### ****************/
@@ -116,7 +115,7 @@ public class UserController {
             return "redirect:/";
         }
 //    System.out.println(user.getUsername());
-        return "signup";
+        return "register";
     }
 
     @PostMapping("/save-user")
@@ -141,7 +140,7 @@ public class UserController {
     public String failed(@ModelAttribute("user") User user,
                          Model model) {
         model.addAttribute("msg", "Sign up failed.");
-        return "signup";
+        return "register";
     }
 
 

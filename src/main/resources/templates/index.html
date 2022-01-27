@@ -1,33 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
+    <!--Anger teckenkodningen för HTML-dokumentet-->
+    <meta charset="UTF-8">
 
-    <!--/*/ <th:block th:include="template.html :: head">
-          </th:block> /*/-->
+    <!--CSS ramverket Bootstrap & Fontawesome anslutna till CSS filen "style.css"-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
 
-    <title>DevConnector</title>
+    <title>Social Network Management Home Page</title>
 </head>
 
 <body>
 
+<!--Blockelement som adderar båda navigeringsfält "nav" & "nav-2"-->
 <th:block th:if="${user.id}">
-    <nav th:include="template.html :: nav"></nav>
+    <nav th:include="navigation.html :: nav"></nav>
 </th:block>
 
 <th:block th:if="${user.id == 0}">
-    <nav th:include="template.html :: div.nav-2"></nav>
+    <nav th:include="navigation.html :: div.nav-2"></nav>
 </th:block>
 
+<!--Sektionelement för Social Network Management framsida-->
 <section class="landing">
     <div class="dark-overlay">
         <div class="landing-inner">
-            <h1 class="x-large">Developer Connector</h1>
-            <p class="lead">Create developer profile,share post and help each other</p>
+
+            <!--Beskrivning av den sociala plattformen-->
+            <h1 class="x-large">Social Network Connection</h1>
+            <p class="lead">Create your profile and communicate digitally by sharing posts</p>
+
+            <!--Behållarelement med hyperlänkar för inloggning & registrering-->
             <div class="buttons">
-                <a th:if="${user.id == 0}" th:href="@{'/signup'}" class="btn btn-primary">Sign Up</a>
-                <a th:if="${user.id == 0}" th:href="@{'/signin'}" class="btn btn">Sign In</a>
+                <a th:if="${user.id == 0}" th:href="@{'/register'}" class="btn btn-primary">Register Account</a>
+                <a th:if="${user.id == 0}" th:href="@{'/login'}" class="btn btn">Login</a>
             </div>
+
         </div>
     </div>
 </section>

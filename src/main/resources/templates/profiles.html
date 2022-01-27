@@ -1,51 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
+  <!--Anger teckenkodningen för HTML-dokumentet-->
+  <meta charset="UTF-8">
 
-  <!--/*/ <th:block th:include="template.html :: head">
-        </th:block> /*/-->
+  <!--CSS ramverket Bootstrap & Fontawesome anslutna till CSS filen "style.css"-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <link rel="stylesheet" href="/css/style.css">
 
-  <title>welcome to dev connector</title>
+  <title>Social Network Members</title>
 </head>
 
 <body>
 
+<!--Blockelement som adderar båda navigeringsfält "nav" & "nav-2"-->
 <th:block th:if="${user.id}">
-  <nav th:include="template.html :: nav"></nav>
+  <nav th:include="navigation.html :: nav"></nav>
 </th:block>
 
 <th:block th:if="${user.id == 0}">
-  <nav th:include="template.html :: div.nav-2"></nav>
+  <nav th:include="navigation.html :: div.nav-2"></nav>
 </th:block>
 
+<!--Sektionelement för Social Network Members framsida-->
 <section class="container">
-  <h1 class="large text-primary">
-    Developers
-  </h1>
-  <p class="lead"><i class="fa fa-connectdevelop" aria-hidden="true"></i>Browse and connect with developers</p>
+  <h1 class="large text-primary">Social Network Members</h1>
+  <p class="lead"><i class="fa fa-connectdevelop" aria-hidden="true"></i>Digital view of connected members</p>
+
+  <!--Iterativ attribut för modellobjektet "user"-->
   <div class="profiles" th:each="user: ${users}">
     <div class="profile bg-light">
-      <img class="round-img" th:src="@{${user.img}}" alt="">
 
+      <!--Bildattribut vars klass medför cirkulär bildform för modellobjektet "user"-->
+      <img class="round-img" th:src="@{${user.img}}" alt="Profile Image" src="">
 
+      <!--Behållarelement med textattribut för "user" & en hyperlänk till profilsidan-->
       <div class="py-2">
-        <h2 th:text="${user.username}">John Doe</h2>
+        <h2 th:text="${user.username}"></h2>
         <p class="lead" th:text="${user.title}"></p>
         <p class="lead" th:text="${user.address}"></p>
         <a th:href="@{'/profile/' + ${user.id}}" class="btn btn-primary">View Profile</a>
-
       </div>
 
+      <!--Oordnad listattribut som renderar beskrivande profilinformation-->
       <ul>
-        <li class="text-primary"><i class="fa fa-check"></i>HTML</li>
-        <li class="text-primary"><i class="fa fa-check"></i>CSS</li>
-        <li class="text-primary"><i class="fa fa-check"></i>javascript</li>
-        <li class="text-primary"><i class="fa fa-check"></i>Python</li>
+        <li class="text-primary"><i class="fa fa-check"></i> Male</li>
+        <li class="text-primary"><i class="fa fa-check"></i> Single</li>
+        <li class="text-primary"><i class="fa fa-check"></i> Unemployed</li>
+        <li class="text-primary"><i class="fa fa-check"></i> Online</li>
       </ul>
+
     </div>
-    <!--      <div class="profile bg-light">-->
-    <!--        <img class="round-img" src="../img/john.png" alt="">-->
+
   </div>
 </section>
 

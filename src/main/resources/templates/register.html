@@ -1,51 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
+  <!--Anger teckenkodningen för HTML-dokumentet-->
+  <meta charset="UTF-8">
 
-  <!--/*/ <th:block th:include="template.html :: head">
-        </th:block> /*/-->
+  <!--CSS ramverket Bootstrap & Fontawesome anslutna till CSS filen "style.css"-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <link rel="stylesheet" href="/css/style.css">
 
-  <title>welcome to dev connector</title>
+  <title>User Registration</title>
 </head>
 
 <body>
 
+<!--Blockelement som adderar båda navigeringsfält "nav" & "nav-2"-->
 <th:block th:if="${user.id}">
-  <nav th:include="template.html :: nav"></nav>
+  <nav th:include="navigation.html :: nav"></nav>
 </th:block>
 
 <th:block th:if="${user.id == 0}">
-  <nav th:include="template.html :: div.nav-2"></nav>
+  <nav th:include="navigation.html :: div.nav-2"></nav>
 </th:block>
 
+<!--Sektionelement för registreringsformuläret-->
 <section class="container">
-  <h1 class="targe text-primary">
-    Sign Up
-  </h1>
+  <h1 class="targe text-primary">Registration</h1>
   <p class="lead">
-    <i class="fa fa-user"></i>Create Your Account
-
+    <i class="fa fa-user"></i> Register Your Account
   </p>
-  <form name="signup" class="form" th:action="@{/save-user}" th:object="${user}" method="POST">
+
+  <!--Textattribut som renderar felmeddelande på modellattributet "regError_msg"-->
+  <p th:text="${regError_msg}"></p>
+
+  <!--Dirigerar formuläret till "/save-user" och deklarerar modellobjektet "user"-->
+  <form name="register" class="form" th:action="@{/save-user}" th:object="${user}" method="POST">
+
     <div class="form-group">
       <input class="form-control" type="text" placeholder="First Name" autocomplete="off" th:field="*{firstname}">
     </div>
+
     <div class="form-group">
       <input class="form-control" type="text" placeholder="Last Name" autocomplete="off" th:field="*{lastname}">
     </div>
+
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Username *" autocomplete="off" required
              aria-required="true" aria-describedby="username-err" th:field="*{username}">
     </div>
+
     <div class="form-group">
       <input class="form-control" type="email" placeholder="Email" aria-describedby="emailHelp" autocomplete="off"
              th:field="*{email}">
     </div>
+
     <div class="form-group">
       <input class="form-control" type="text" placeholder="Title" aria-describedby="emailHelp" autocomplete="off"
              th:field="*{title}">
     </div>
+
     <div class="form-group">
       <input class="form-control" type="text" placeholder="City" aria-describedby="emailHelp" autocomplete="off"
              th:field="*{address}">
@@ -55,17 +71,19 @@
       <input id="password" name="password" class="form-control" type="password" placeholder="Password *" required
              aria-required="true" th:field="*{password}">
     </div>
+
     <div class="form-group">
-      <input id="password_confirm" name="password_confirm" class="form-control" type="password"
+      <input id="password_verify" name="password_verify" class="form-control" type="password"
              placeholder="Confirm Password *" required aria-required="true">
     </div>
-    <input type="submit" value="Sign Up" class="btn btn-primary">
+
+    <!--Knappelement som registrerar användaren-->
+    <input type="submit" value="Register" class="btn btn-primary">
+
   </form>
+
 </section>
 
-<!--  <script src="js/jquery.min.js"></script>-->
-<!--  <script src="js/popper.min.js"></script>-->
-<!--  <script src="js/bootstrap.min.js"></script>-->
 </body>
 
 </html>

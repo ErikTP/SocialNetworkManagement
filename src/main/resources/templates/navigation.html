@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!--CSS ramverk som Bootstrap och Fontawesome anslutna till CSS filen "style.css"-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!--JQuery länk för att koda Jquery i den anslutna JavaScript filen "main.js"-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
+  <script src="/js/main.js" defer></script>
+
+  <title>Navigation Bar</title>
+</head>
+
+<body>
+
+<!--Navigeringsfält med oordnad lista av hyperlänkar för när användaren är INLOGGAD-->
+<nav>
+  <div class="nav navbar bg-dark">
+    <h1>
+      <a th:href="@{'/'}">
+        <i class="fa fa-code"></i> Social Network Management
+      </a>
+    </h1>
+    <ul>
+      <li><a th:href="@{'/profiles'}">Members</a></li>
+      <li><a th:href="@{'/posts'}">Posts</a></li>
+      <li><a th:href="@{'/profile/' + ${user.id}}">Profile</a></li>
+      <li><a th:href="@{'/edit/' + ${user.id}}">Edit Account</a></li>
+      <li><a th:href="@{'/logout'}">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!--Navigeringsfält med oordnad lista av hyperlänkar för när användaren är UTLOGGAD-->
+<div class="nav-2">
+  <div class="nav navbar bg-dark">
+    <h1>
+      <a th:href="@{'/'}">
+        <i class="fa fa-code"></i> Social Network Management
+      </a>
+    </h1>
+    <ul>
+      <li><a th:href="@{'/profiles'}">Members</a></li>
+      <li><a th:href="@{'/register'}">Register</a></li>
+      <li><a th:href="@{'/login'}">Login</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+
+</html>

@@ -32,7 +32,7 @@ public class PostController {
             return "posts";
         }
         model.addAttribute("msg", "You must Sign In to view Posts");
-        return "signin";
+        return "login";
     }
 
     /******************** Add Post ********************/
